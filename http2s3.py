@@ -1,13 +1,15 @@
 #!/usr/bin/env python
 
-
-
+import os
 
 # Cheap configuration reader
-conf = dict(kv.split('=', 1) 
-            for kv in 
-            open("env").read().split('\n')
-            if kv)
+if os.path.isfile("env"):
+    conf = dict(kv.split('=', 1) 
+		for kv in 
+		open("env").read().split('\n')
+		if kv)
+else:
+    conf = os.environ
 
 ##############################################################################
 
@@ -34,7 +36,7 @@ PAGESIZE = int(conf.get("PAGESIZE", "20"))
 
 
 # Throw an exception right away, rather than waiting for the first request
-HTTP_USER, HTTP_PASS = conf["HTTP_UESR"], conf["HTTP_PASS"]
+HTTP_USER, HTTP_PASS = conf["HTTP_USER"], conf["HTTP_PASS"]
 
 from flask_httpauth import HTTPBasicAuth
 auth = HTTPBasicAuth()

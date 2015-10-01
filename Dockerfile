@@ -3,6 +3,7 @@ RUN pip install boto
 RUN pip install Flask
 RUN pip install flask-httpauth
 RUN pip install gunicorn
+WORKDIR /src
 
 # Debugging stuff below
 #RUN pip install ipython

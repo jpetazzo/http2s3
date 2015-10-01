@@ -1,6 +1,15 @@
 www:
   build: .
   ports:
-    - 5000:5000
+    - 80:5000
   volumes:
     - ".:/src"
+  environment:
+    AWS_ACCESS_KEY:
+    AWS_SECRET_KEY:
+    BUCKET:
+    HTTP_USER:
+    HTTP_PASS:
+    PAGESIZE:
+  command: gunicorn --bind 0.0.0.0:5000 --workers 10 http2s3:app
+  user: nobody
